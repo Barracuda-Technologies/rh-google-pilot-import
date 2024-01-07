@@ -20,15 +20,23 @@ class Gpilot():
         ui = self._rhapi.ui
         ui.register_panel("gpilot-import", "Google Pilots", "format")
         ui.register_quickbutton("gpilot-import", "gpilot-import-button", "Import", self.import_pilot)
-        cl_eventkey = UIField(name = 'cl-event-key', label = 'Cloud Link Event Private Key', field_type = UIFieldType.TEXT, desc = "Authentication key provided by Cloudlink during event registration.")
+        gpilot_form_name = UIField(name = 'gpilot-form-name', label = 'Google Sheet Name', field_type = UIFieldType.TEXT, desc = "The name of the Google Sheet. With spaces and all.")
+        fields = self._rhapi.fields
+        fields.register_option(gpilot_form_name, "gpilot-import")
 
     def import_pilot(self, args):
         credentials = self.get_credentials()
-        if credentials is not None:
+        filename = self._rhapi.db.option("gpilot-form-name")
+        filenamenotempty = True if filename else False
+        if credentials is not None and filenamenotempty:
             gc = gspread.service_account_from_dict(credentials)
-            sh = gc.open("Test Form (Responses)")
-            all_records = sh.sheet1.get_all_records()
-            self.save_pilot(all_records)
+            try:
+                
+                sh = gc.open(filename)
+                all_records = sh.sheet1.get_all_records()
+                self.save_pilot(all_records)
+            except:
+                self.logger.warning("File not found")
 
     def get_credentials(self):
         here = os.path.dirname(os.path.abspath(__file__))
