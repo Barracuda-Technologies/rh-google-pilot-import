@@ -18,13 +18,14 @@ class Gpilot():
 
     def init_ui(self,args):
         ui = self._rhapi.ui
-        ui.register_panel("gpilot-import", "Google Pilots", "format")
+        ui.register_panel("gpilot-import", "Google Sheets Pilot Import", "format")
         ui.register_quickbutton("gpilot-import", "gpilot-import-button", "Import", self.import_pilot)
-        gpilot_form_name = UIField(name = 'gpilot-form-name', label = 'Google Sheet Name', field_type = UIFieldType.TEXT, desc = "The name of the Google Sheet. With spaces and all.")
+        gpilot_form_name = UIField(name = 'gpilot-form-name', label = 'Google Sheet Name', field_type = UIFieldType.TEXT, desc = "The name of the Google Sheet. With spaces and all. For now please make sure there is 1 col called Name and 1 called Callsign on the first sheet.")
         fields = self._rhapi.fields
         fields.register_option(gpilot_form_name, "gpilot-import")
 
     def import_pilot(self, args):
+        self._rhapi.ui.message_notify("Beggining Google Sheets Import....")
         credentials = self.get_credentials()
         filename = self._rhapi.db.option("gpilot-form-name")
         filenamenotempty = True if filename else False
@@ -35,8 +36,10 @@ class Gpilot():
                 sh = gc.open(filename)
                 all_records = sh.sheet1.get_all_records()
                 self.save_pilot(all_records)
-            except:
-                self.logger.warning("File not found")
+            except Exception as x:
+                print(x)
+                self._rhapi.ui.message_notify("Google Sheet not found")
+                self.logger.warning("Google Sheet not found")
 
     def get_credentials(self):
         here = os.path.dirname(os.path.abspath(__file__))
@@ -49,19 +52,25 @@ class Gpilot():
             return data
         except:
             self.logger.warning("Credentials file not found")
+            self._rhapi.ui.message_notify("Credentials file not found. Please refer documentation.")
             data = None
             return data
 
     def save_pilot(self, all_records):
-        for record in all_records:
+        
+        for idx, record in enumerate(all_records):
+            pilotnumber = str(idx + 1)
+            pilotname = record["Name"] if (record["Name"] and record["Name"] is not None) else "~Pilot "+ pilotnumber + " Name"
+            pilotcallsign = record["Callsign"] if (record["Callsign"] and record["Callsign"] is not None) else "~Callsign "+ pilotnumber
             pilot = {
-                "name": record["Name"],
-                "callsign": record["Callsign"]
+                "name": pilotname,
+                "callsign": pilotcallsign
             }
             existingpilot = self.check_existing_pilot(pilot)
             if not existingpilot:
                 self.logger.info("Added pilot " + pilot["name"] + "-" + pilot["callsign"])
                 self._rhapi.db.pilot_add(name=pilot["name"], callsign=pilot["callsign"])
+        self._rhapi.ui.message_notify("Import complete, please refresh.")
 
     def check_existing_pilot(self,pilot):
         localpilots = self._rhapi.db.pilots
