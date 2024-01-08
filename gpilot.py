@@ -71,6 +71,7 @@ class Gpilot():
                 self.logger.info("Added pilot " + pilot["name"] + "-" + pilot["callsign"])
                 self._rhapi.db.pilot_add(name=pilot["name"], callsign=pilot["callsign"])
         self._rhapi.ui.message_notify("Import complete, please refresh.")
+        self._rhapi.ui.broadcast_pilots()
 
     def check_existing_pilot(self,pilot):
         localpilots = self._rhapi.db.pilots
