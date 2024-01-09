@@ -38,7 +38,7 @@ rm temp.zip
 ```
 4. Intall a required library for Google Sheets to work in the timer with the following cmd line:
 ```
-pip install gspreads
+pip install gspread
 ```
 4. Copy over the credentials.json file from step 13 in section 1 above to the newly created plugin folder.
 5. Restart the Pi and a new section called Google Pilots will appear in the Format page. 
