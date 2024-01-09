@@ -27,8 +27,16 @@ This plugin allows race directors to import pilots directly from Google Sheets o
 
 ### 3. The plugin
 1. SSH into the timer.
-2. Create and copy the plugin files into the /src/server/plugins directory with the following cmd lines.
-3. Intall a required library for Google Sheets to work in the timer with the following cmd line:
+2. Copy the plugin files into the ``` ~/RotorHazard/src/server/plugins``` directory with the following cmd lines or download latest from: https://github.com/Barracuda-Technologies/rh-google-pilot-import/releases
+```
+cd ~
+sudo rm -r RotorHazard/src/server/plugins/googlepilot
+wget https://github.com/Barracuda-Technologies/rh-google-pilot-import/archive/refs/tags/v1.0.0.zip -O temp.zip
+unzip temp.zip
+mv rh-google-pilot-import-1.0.0 RotorHazard/src/server/plugins/googlepilot
+rm temp.zip
+```
+4. Intall a required library for Google Sheets to work in the timer with the following cmd line:
 ```
 pip install gspreads
 ```
