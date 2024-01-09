@@ -42,3 +42,13 @@ pip install gspreads
 ```
 4. Copy over the credentials.json file from step 13 in section 1 above to the newly created plugin folder.
 5. Restart the Pi and a new section called Google Pilots will appear in the Format page. 
+
+## User Guide
+1. Create a new google sheet page or a new Google Form which sends results to a Google Sheet. Give the Google Sheet a name or take note of the given name. e.g: ***Registration Form***
+2. Make sure there is 1 collumn called **Name** and 1 collumn called **Callsign**.
+3. Click on the **Share** button on the top right corner of the sheet and enter the service email address created in Section 1 of the Setup Guide above. Click done.
+4. Start up RotorHazard and head over the format page. Under hte panel **Google Pilot Import**, enter the name of the Google sheet created in step 1. e.g: ***Registration Form***
+5. Hit the import button and the pilot names and callsigns will be imported automatically.
+
+> [!NOTE]
+> If name and callsign already exist in the RotorHazard database, this pilot will be skipped. Only new pilots will be added. No removal is done. 
