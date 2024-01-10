@@ -14,6 +14,7 @@ This plugin allows race directors to import pilots directly from Google Sheets o
 8. On the left side bar, click on **"Credentials"**.
 9. Click on **Manage Service Accounts** on the right followed by **"+ CREATE SERVICE ACCOUNT"** at the top
 10. Enter a service account name and thats it. Copy the generated service email address and click done. Step 2 and 3 are not required
+    
     <img width="590" alt="google-pilot-03" src="https://github.com/Barracuda-Technologies/rh-google-pilot-import/assets/17153870/485dde55-7689-40d1-a463-4df384a2d09b">
 
 12. Once back on the main page, the service account status will be Enabled. On the far right, click on the 3 dots and select manage keys
@@ -27,7 +28,6 @@ This plugin allows race directors to import pilots directly from Google Sheets o
 4. For the current version of the plugin, create collumns called "Name" and "Callsign". These are mandatory. Any other collumns can be created but wont be picked up by the plugin.
 5. Hit the "Share" button at the top right corner and enter teh service email address from step 10 in section 1 above.
 6. Hit done and that's.
-<img width="676" alt="google-pilot-04" src="https://github.com/Barracuda-Technologies/rh-google-pilot-import/assets/17153870/16ca7279-72c9-4402-97dc-d68912f2a8f9">
 
 ### 3. The plugin
 1. SSH into the timer.
