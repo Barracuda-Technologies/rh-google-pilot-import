@@ -4,14 +4,14 @@ This plugin allows race directors to import pilots directly from Google Sheets o
 ## Setup Steps
 ### 1. Google Cloud Project - 1 time setup.
 1. Visit https://cloud.google.com
-2. Create a new project and give it a name
+2. Create a new project and give it a name. It could be any name such as your chapter or club name. e.g. _My Drone Race Club_
 3. With newly created project selected, click on APIs and Services
 4. In the top search bar, search for **Google Drive API** and press enter
 5. Click **enable** Google Drive
 6. In the top search bar, search for **Google Sheets API** and press enter
 7. Click **enable** Google Sheet
 8. On the left side bar, click on **"Credentials"**.
-9. Click on Manage Service Accounts on the right followed by **"+ CREATE SERVICE ACCOUNT"** at the top
+9. Click on **Manage Service Accounts** on the right followed by **"+ CREATE SERVICE ACCOUNT"** at the top
 10. Enter a service account name and thats it. Copy the generated service email address and click done. Step 2 and 3 are not required
 11. Once back on the main page, the service account status will be Enabled. On the far right, click on the 3 dots and select manage keys
 12. Click on Add Key -> Create New Key -> Select JSON -> Create.
