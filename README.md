@@ -14,9 +14,11 @@ This plugin allows race directors to import pilots directly from Google Sheets o
 8. On the left side bar, click on **"Credentials"**.
 9. Click on **Manage Service Accounts** on the right followed by **"+ CREATE SERVICE ACCOUNT"** at the top
 10. Enter a service account name and thats it. Copy the generated service email address and click done. Step 2 and 3 are not required
-11. Once back on the main page, the service account status will be Enabled. On the far right, click on the 3 dots and select manage keys
-12. Click on Add Key -> Create New Key -> Select JSON -> Create.
-13. Save the newly created JSON file on desktop and rename it to credentials.json
+    <img width="590" alt="google-pilot-03" src="https://github.com/Barracuda-Technologies/rh-google-pilot-import/assets/17153870/485dde55-7689-40d1-a463-4df384a2d09b">
+
+12. Once back on the main page, the service account status will be Enabled. On the far right, click on the 3 dots and select manage keys
+13. Click on Add Key -> Create New Key -> Select JSON -> Create.
+14. Save the newly created JSON file on desktop and rename it to credentials.json
 
 ### 2. Google Sheets
 1. Head over to https://drive.google.com
@@ -45,6 +47,7 @@ pip install gspread
    <img width="656" alt="google-pilot-01" src="https://github.com/Barracuda-Technologies/rh-google-pilot-import/assets/17153870/60df53cd-f27f-47f2-86c2-16783d7bf451">
 
 6. Restart the Pi and a new section called Google Pilots will appear in the Format page. 
+<img width="899" alt="google-pilot-02" src="https://github.com/Barracuda-Technologies/rh-google-pilot-import/assets/17153870/cbdc7b7f-d9a4-4235-a67e-51bb62aea984">
 
 ## User Guide
 1. Create a new google sheet page or a new Google Form which sends results to a Google Sheet. Give the Google Sheet a name or take note of the given name. e.g: ***Registration Form***
