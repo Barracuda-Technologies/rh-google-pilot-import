@@ -1,3 +1,4 @@
+<img width="656" alt="google-pilot-01" src="https://github.com/Barracuda-Technologies/rh-google-pilot-import/assets/17153870/302f54f3-68e5-46a1-8ee2-b7443f888ff4">
 # Google Sheets Pilot Import for RotorHazard FPV Timing System
 This plugin allows race directors to import pilots directly from Google Sheets or Google Forms(indirectly) into RotorHazard. Before being able to import pilots, race directors are required to follow a few steps to obtain credentials from Google which allows Rotorhazard and Google sheets to connect. These steps only need to be done once.
 
@@ -41,7 +42,9 @@ rm temp.zip
 pip install gspread
 ```
 4. Copy over the credentials.json file from step 13 in section 1 above to the newly created plugin folder.
-5. Restart the Pi and a new section called Google Pilots will appear in the Format page. 
+   <img width="656" alt="google-pilot-01" src="https://github.com/Barracuda-Technologies/rh-google-pilot-import/assets/17153870/60df53cd-f27f-47f2-86c2-16783d7bf451">
+
+6. Restart the Pi and a new section called Google Pilots will appear in the Format page. 
 
 ## User Guide
 1. Create a new google sheet page or a new Google Form which sends results to a Google Sheet. Give the Google Sheet a name or take note of the given name. e.g: ***Registration Form***
