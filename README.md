@@ -27,6 +27,7 @@ This plugin allows race directors to import pilots directly from Google Sheets o
 4. For the current version of the plugin, create collumns called "Name" and "Callsign". These are mandatory. Any other collumns can be created but wont be picked up by the plugin.
 5. Hit the "Share" button at the top right corner and enter teh service email address from step 10 in section 1 above.
 6. Hit done and that's.
+<img width="676" alt="google-pilot-04" src="https://github.com/Barracuda-Technologies/rh-google-pilot-import/assets/17153870/16ca7279-72c9-4402-97dc-d68912f2a8f9">
 
 ### 3. The plugin
 1. SSH into the timer.
