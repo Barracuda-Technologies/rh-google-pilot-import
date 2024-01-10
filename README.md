@@ -1,4 +1,4 @@
-<img width="656" alt="google-pilot-01" src="https://github.com/Barracuda-Technologies/rh-google-pilot-import/assets/17153870/302f54f3-68e5-46a1-8ee2-b7443f888ff4">
+
 # Google Sheets Pilot Import for RotorHazard FPV Timing System
 This plugin allows race directors to import pilots directly from Google Sheets or Google Forms(indirectly) into RotorHazard. Before being able to import pilots, race directors are required to follow a few steps to obtain credentials from Google which allows Rotorhazard and Google sheets to connect. These steps only need to be done once.
 
