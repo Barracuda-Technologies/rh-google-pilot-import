@@ -3,6 +3,10 @@
 This plugin allows race directors to import pilots directly from Google Sheets or Google Forms(indirectly) into RotorHazard. Before being able to import pilots, race directors are required to follow a few steps to obtain credentials from Google which allows Rotorhazard and Google sheets to connect. These steps only need to be done once.
 
 ## Setup Steps
+There are 3 steps to get this plugin going. First is to create the credential file and service account in Google Cloud. This only needs to be done once. Step 2 is to simply grant access to the service account from the Google Sheets and finally step 3 is to install this plugin itself and most importantly copy the Google credentials.json file into the Plugin folder within RotorHazard. Steps are listed below. There is an installation guide video available as well at the following link:
+
+https://youtu.be/eYu2nZQnT6c
+
 ### 1. Google Cloud Project - 1 time setup.
 1. Visit https://cloud.google.com
 2. Create a new project and give it a name. It could be any name such as your chapter or club name. e.g. _My Drone Race Club_
