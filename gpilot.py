@@ -25,7 +25,7 @@ class Gpilot():
         fields.register_option(gpilot_form_name, "gpilot-import")
 
     def import_pilot(self, args):
-        self._rhapi.ui.message_notify("Beggining Google Sheets Import....")
+        self._rhapi.ui.message_notify("Beginning Google Sheets Import....")
         credentials = self.get_credentials()
         filename = self._rhapi.db.option("gpilot-form-name")
         filenamenotempty = True if filename else False
@@ -62,14 +62,35 @@ class Gpilot():
             pilotnumber = str(idx + 1)
             pilotname = record["Name"] if (record["Name"] and record["Name"] is not None) else "~Pilot "+ pilotnumber + " Name"
             pilotcallsign = record["Callsign"] if (record["Callsign"] and record["Callsign"] is not None) else "~Callsign "+ pilotnumber
+            pilotphonetic = record["Phonetic"] if (record["Phonetic"] and record["Phonetic"] is not None) else " "
+            pilotcolor = record["Colour"] if (record["Colour"] and record["Colour"] is not None) else "#ff0055"
+            pilotmgpid = record["MGP ID"] if (record["MGP ID"] and record["MGP ID"] is not None) else " "
+            pilottracksideid = record["FPVS UUID"] if (record["FPVS UUID"] and record["FPVS UUID"] is not None) else " "
+            pilotcountry = record["Country"] if (record["Country"] and record["Country"] is not None) else " "
             pilot = {
                 "name": pilotname,
-                "callsign": pilotcallsign
+                "callsign": pilotcallsign,
+                "phonetic": pilotphonetic,
+                "color": pilotcolor
             }
+
             existingpilot = self.check_existing_pilot(pilot)
             if not existingpilot:
-                self.logger.info("Added pilot " + pilot["name"] + "-" + pilot["callsign"])
-                self._rhapi.db.pilot_add(name=pilot["name"], callsign=pilot["callsign"])
+
+                self._rhapi.db.pilot_add(name=pilot["name"],
+                                         callsign=pilot["callsign"],
+                                         phonetic=pilot["phonetic"],
+                                         color=pilot["color"])
+                self.logger.info("Added pilot " + pilot["name"] + "-" + pilot["callsign"] + " with id:"
+                                 + str(self._rhapi.db.pilots[-1].id))
+                current_id = self._rhapi.db.pilots[-1].id
+                # alter the attribute
+                pilot_attributes = {
+                    "mgp_pilot_id": pilotmgpid,
+                    "fpvs_uuid": pilottracksideid,
+                    "country": pilotcountry
+                }
+                self._rhapi.db.pilot_alter(current_id, attributes=pilot_attributes)
         self._rhapi.ui.message_notify("Import complete, please refresh.")
         self._rhapi.ui.broadcast_pilots()
 
