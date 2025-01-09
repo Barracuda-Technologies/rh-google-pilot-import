@@ -38,8 +38,8 @@ class Gpilot():
                 self.save_pilot(all_records)
             except Exception as x:
                 print(x)
-                self._rhapi.ui.message_notify("Google Sheet not found")
-                self.logger.warning("Google Sheet not found")
+                self._rhapi.ui.message_notify("Google Sheet Import Error - See log")
+                self.logger.warning("Google Sheet not found" + str(x))
 
     def get_credentials(self):
         here = os.path.dirname(os.path.abspath(__file__))
@@ -62,21 +62,25 @@ class Gpilot():
             pilotnumber = str(idx + 1)
             pilotname = record["Name"] if (record["Name"] and record["Name"] is not None) else "~Pilot "+ pilotnumber + " Name"
             pilotcallsign = record["Callsign"] if (record["Callsign"] and record["Callsign"] is not None) else "~Callsign "+ pilotnumber
-            pilotphonetic = record["Phonetic"] if (record["Phonetic"] and record["Phonetic"] is not None) else " "
-            pilotcolor = record["Colour"] if (record["Colour"] and record["Colour"] is not None) else "#ff0055"
-            pilotmgpid = record["MGP ID"] if (record["MGP ID"] and record["MGP ID"] is not None) else " "
-            pilottracksideid = record["FPVS UUID"] if (record["FPVS UUID"] and record["FPVS UUID"] is not None) else " "
-            pilotcountry = record["Country"] if (record["Country"] and record["Country"] is not None) else " "
             pilot = {
                 "name": pilotname,
-                "callsign": pilotcallsign,
-                "phonetic": pilotphonetic,
-                "color": pilotcolor
+                "callsign": pilotcallsign
             }
+            if "Phonetic" in record:
+                pilotphonetic = record["Phonetic"] if (record["Phonetic"] and record["Phonetic"] is not None) else " "
+                pilot["phonetic"] = pilotphonetic
+            if "Colour" in record:
+                pilotcolor = record["Colour"] if (record["Colour"] and record["Colour"] is not None) else "#ff0055"
+                pilot["color"] = pilotcolor
+            if "MGP ID" in record:
+                pilotmgpid = record["MGP ID"] if (record["MGP ID"] and record["MGP ID"] is not None) else " "
+            if "FPVS UUID" in record:
+                pilottracksideid = record["FPVS UUID"] if (record["FPVS UUID"] and record["FPVS UUID"] is not None) else " "
+            if "Country" in record:
+                pilotcountry = record["Country"] if (record["Country"] and record["Country"] is not None) else " "
 
             existingpilot = self.check_existing_pilot(pilot)
             if not existingpilot:
-
                 self._rhapi.db.pilot_add(name=pilot["name"],
                                          callsign=pilot["callsign"],
                                          phonetic=pilot["phonetic"],
@@ -84,12 +88,24 @@ class Gpilot():
                 self.logger.info("Added pilot " + pilot["name"] + "-" + pilot["callsign"] + " with id:"
                                  + str(self._rhapi.db.pilots[-1].id))
                 current_id = self._rhapi.db.pilots[-1].id
-                # alter the attribute
-                pilot_attributes = {
-                    "mgp_pilot_id": pilotmgpid,
-                    "fpvs_uuid": pilottracksideid,
-                    "country": pilotcountry
-                }
+
+                contains_mgp_id = False
+                contains_fpvs_uuid = False
+                contains_country = False
+                for i in range(len(self._rhapi.fields.pilot_attributes)):
+                    if self._rhapi.fields.pilot_attributes[i].name == 'mgp_pilot_id':
+                        contains_mgp_id = True
+                    if self._rhapi.fields.pilot_attributes[i].name == 'fpvs_uuid':
+                        contains_fpvs_uuid = True
+                    if self._rhapi.fields.pilot_attributes[i].name == 'country':
+                        contains_country = True
+                pilot_attributes = {}
+                if contains_mgp_id and "MGP ID" in record:
+                    pilot_attributes["mgp_pilot_id"] = pilotmgpid
+                if contains_fpvs_uuid and "FPVS UUID" in record:
+                    pilot_attributes["fpvs_uuid"] = pilottracksideid
+                if contains_country and "Country" in record:
+                    pilot_attributes["country"] = pilotcountry
                 self._rhapi.db.pilot_alter(current_id, attributes=pilot_attributes)
         self._rhapi.ui.message_notify("Import complete, please refresh.")
         self._rhapi.ui.broadcast_pilots()
