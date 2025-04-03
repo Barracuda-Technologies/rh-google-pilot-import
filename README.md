@@ -23,40 +23,36 @@ https://youtu.be/eYu2nZQnT6c
 
 12. Once back on the main page, the service account status will be Enabled. On the far right, click on the 3 dots and select manage keys
 13. Click on Add Key -> Create New Key -> Select JSON -> Create.
-14. Save the newly created JSON file on desktop and rename it to credentials.json
+14. Save the newly created JSON file on desktop and rename it to "credentials.json"
 
 ### 2. Google Sheets
 1. Head over to https://drive.google.com
 2. Create a Google sheets anywhere.
 3. Give it a name. Any name. e.g: Pilot Registration Form
-4. For the current version of the plugin, create collumns called "Name" and "Callsign". These are mandatory. Any other collumns can be created but wont be picked up by the plugin.
+4. For the current version of the plugin, create columns called "Name" and "Callsign". These are mandatory. Any other columns can be created but wont be picked up by the plugin.
 5. Hit the "Share" button at the top right corner and enter teh service email address from step 10 in section 1 above.
 6. Hit done and that's.
 
-### 3. The plugin
-1. SSH into the timer.
-2. Copy the plugin files into the ``` ~/RotorHazard/src/server/plugins``` directory with the following cmd lines or download latest from: https://github.com/Barracuda-Technologies/rh-google-pilot-import/releases
-```
-cd ~
-sudo rm -r RotorHazard/src/server/plugins/googlepilot
-wget https://github.com/Barracuda-Technologies/rh-google-pilot-import/archive/refs/tags/v1.0.0.zip -O temp.zip
-unzip temp.zip
-mv rh-google-pilot-import-1.0.0 RotorHazard/src/server/plugins/googlepilot
-rm temp.zip
-```
-4. Intall a required library for Google Sheets to work in the timer with the following cmd line:
-```
-pip install gspread
-```
-4. Copy over the credentials.json file from step 13 in section 1 above to the newly created plugin folder.
-   <img width="656" alt="google-pilot-01" src="https://github.com/Barracuda-Technologies/rh-google-pilot-import/assets/17153870/60df53cd-f27f-47f2-86c2-16783d7bf451">
+### 3. The plugin 
+1. Install the plugin from the community plugins manager 
+2. Copy over the "credentials.json" file from step 14 in section 1 above to the plugin folder within %rhdata.
+3. Restart the Pi and a new section called Google Pilots will appear in the Format page.
 
-6. Restart the Pi and a new section called Google Pilots will appear in the Format page. 
 <img width="899" alt="google-pilot-02" src="https://github.com/Barracuda-Technologies/rh-google-pilot-import/assets/17153870/cbdc7b7f-d9a4-4235-a67e-51bb62aea984">
 
 ## User Guide
 1. Create a new google sheet page or a new Google Form which sends results to a Google Sheet. Give the Google Sheet a name or take note of the given name. e.g: ***Registration Form***
-2. Make sure there is 1 collumn called **Name** and 1 collumn called **Callsign**.
+2. Make sure there are columns called:
+   * Name
+   * Callsign
+
+3. The following columns are optional and the plugin will pull the values from this sheet if the fields are available in RotorHazard. Some fields are created by other plugins e.g. MultiGP ID =  https://github.com/i-am-grub/MultiGP_Toolkit
+   * Pilot color
+   * Pilot Phonetic
+   * Pilot Country
+   * Pilot MultiGP ID
+   * Pilot FPVScores UUID
+
 3. Click on the **Share** button on the top right corner of the sheet and enter the service email address created in Section 1 of the Setup Guide above. Click done.
 4. Start up RotorHazard and head over the format page. Under hte panel **Google Pilot Import**, enter the name of the Google sheet created in step 1. e.g: ***Registration Form***
 5. Hit the import button and the pilot names and callsigns will be imported automatically.
