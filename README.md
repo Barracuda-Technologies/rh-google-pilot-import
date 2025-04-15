@@ -34,8 +34,8 @@ https://youtu.be/eYu2nZQnT6c
 6. Hit done and that's.
 
 ### 3. The plugin 
-1. Install the plugin from the community plugins manager 
-2. Copy over the "credentials.json" file from step 14 in section 1 above to the plugin folder within %rhdata.
+1. Install through the "Community Plugins" area within RotorHazard. Alternately, copy the `pilots_from_google_sheets` directory from inside `custom_plugins` into the plugins directory of your RotorHazard data directory.
+2. Copy over the "credentials.json" file from step 14 in section 1 above to the plugin folder.
 3. Restart the Pi and a new section called Google Pilots will appear in the Format page.
 
 <img width="899" alt="google-pilot-02" src="https://github.com/Barracuda-Technologies/rh-google-pilot-import/assets/17153870/cbdc7b7f-d9a4-4235-a67e-51bb62aea984">
