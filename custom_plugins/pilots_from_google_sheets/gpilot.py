@@ -18,9 +18,9 @@ class Gpilot():
 
     def init_ui(self,args):
         ui = self._rhapi.ui
-        ui.register_panel("gpilot-import", "Google Sheets Pilot Import", "format")
+        ui.register_panel("gpilot-import", "Pilots from Google Sheets Import", "format")
         ui.register_quickbutton("gpilot-import", "gpilot-import-button", "Import", self.import_pilot)
-        gpilot_form_name = UIField(name = 'gpilot-form-name', label = 'Google Sheet Name', field_type = UIFieldType.TEXT, desc = "The name of the Google Sheet. With spaces and all. For now please make sure there is 1 col called Name and 1 called Callsign on the first sheet.")
+        gpilot_form_name = UIField(name = 'gpilot-form-name', label = 'Google Sheet Name', field_type = UIFieldType.TEXT, desc = "The name of the Google Sheet. With spaces and all. Please make sure there is at least 1 col called Name and 1 called Callsign on the first sheet.")
         fields = self._rhapi.fields
         fields.register_option(gpilot_form_name, "gpilot-import")
 
