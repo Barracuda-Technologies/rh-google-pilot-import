@@ -1,7 +1,7 @@
 {
     "domain": "pilots_from_google_sheets",
     "name": "Pilots from Google Sheets",
-    "author" : "Viki Baarathi / J Ro",
+    "author" : "Viki \"Barracuda\" Baarathi / J Ro",
     "author_uri" : "https://github.com/vikibaarathi",
     "description" : "Google Sheets Pilot Importer for RotorHazard",
     "documentation_uri": "https://github.com/vikibaarathi/pilots-from-google-sheets/blob/main/README.md",
