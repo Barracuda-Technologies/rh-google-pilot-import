@@ -5,7 +5,7 @@
     "author_uri" : "https://github.com/vikibaarathi",
     "description" : "Google Sheets Pilot Importer for RotorHazard",
     "documentation_uri": "https://github.com/vikibaarathi/pilots-from-google-sheets/blob/main/README.md",
-    "version" : "2.1.0",
+    "version" : "2.1.2",
     "required_rhapi_version" : "1.2",
     "category": ["Race Management"],
     "dependencies" : ["gspread==6.2.0"]
