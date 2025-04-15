@@ -114,7 +114,7 @@ class Gpilot():
         localpilots = self._rhapi.db.pilots
         existing = False
         for localpilot in localpilots:
-            if (localpilot.name == pilot["name"] and localpilot.callsign == pilot["callsign"]):
+            if (localpilot.name == pilot["name"] or localpilot.callsign == pilot["callsign"]):
                 existing = True
 
         return existing
